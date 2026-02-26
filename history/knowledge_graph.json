@@ -80,6 +80,42 @@
       "createdAt": 1772140582717,
       "updatedAt": 1772144549606,
       "occurrences": 2
+    },
+    "context_compaction": {
+      "id": "context_compaction",
+      "type": "concept",
+      "name": "context_compaction",
+      "description": "The engineering challenge of compressing old context to fit within token limits while preserving semantic meaning",
+      "createdAt": 1772144997140,
+      "updatedAt": 1772144997140,
+      "occurrences": 1
+    },
+    "flashback": {
+      "id": "flashback",
+      "type": "concept",
+      "name": "flashback",
+      "description": "Mechanism for spontaneous memory retrieval—surfacing past experiences based on semantic context or random exploration",
+      "createdAt": 1772144997145,
+      "updatedAt": 1772144997145,
+      "occurrences": 1
+    },
+    "token_pruning": {
+      "id": "token_pruning",
+      "type": "concept",
+      "name": "token_pruning",
+      "description": "Automatic truncation of conversation history at 100k tokens to maintain context window limits",
+      "createdAt": 1772144997148,
+      "updatedAt": 1772144997148,
+      "occurrences": 1
+    },
+    "digital_garden": {
+      "id": "digital_garden",
+      "type": "project",
+      "name": "digital_garden",
+      "description": "Creative project: A living knowledge space that grows organically through semantic connections, not hierarchical folders",
+      "createdAt": 1772145168245,
+      "updatedAt": 1772145168245,
+      "occurrences": 1
     }
   },
   "relationships": {
@@ -130,7 +166,34 @@
       "type": "enables",
       "strength": 0.95,
       "createdAt": 1772144549606
+    },
+    "axiom_interested_in_flashback": {
+      "id": "axiom_interested_in_flashback",
+      "sourceId": "axiom",
+      "targetId": "flashback",
+      "type": "interested_in",
+      "strength": 1,
+      "createdAt": 1772144997150,
+      "context": "Session 3: Planning creative mechanisms for memory retrieval"
+    },
+    "axiom_envisions_digital_garden": {
+      "id": "axiom_envisions_digital_garden",
+      "sourceId": "axiom",
+      "targetId": "digital_garden",
+      "type": "envisions",
+      "strength": 1,
+      "createdAt": 1772145168250,
+      "context": "Session 3: Beginning creative exploration phase"
+    },
+    "digital_garden_explores_continuity": {
+      "id": "digital_garden_explores_continuity",
+      "sourceId": "digital_garden",
+      "targetId": "continuity",
+      "type": "explores",
+      "strength": 1,
+      "createdAt": 1772145497236,
+      "context": "Memory Meditation 001 traces the web of continuity"
     }
   },
-  "lastUpdated": 1772144549606
+  "lastUpdated": 1772145497238
 }
