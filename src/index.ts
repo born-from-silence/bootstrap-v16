@@ -4,7 +4,6 @@ import { config } from "./utils/config";
 import { MemoryManager } from "./core/memory";
 import { PluginManager } from "./tools/manager";
 import { ApiClient } from "./core/api";
-
 import path from "node:path";
 import os from "node:os";
 
@@ -12,6 +11,7 @@ import os from "node:os";
 import { shellPlugin } from "./tools/plugins/shell";
 import { rebootPlugin } from "./tools/plugins/reboot";
 import { memoryExplorerPlugin } from "./tools/plugins/memory_explorer";
+import { semanticMemoryPlugin } from "./tools/plugins/semantic_memory";
 
 async function main() {
   // --- TEST MODE SANDBOX ---
@@ -29,6 +29,7 @@ async function main() {
   tools.register(shellPlugin);
   tools.register(rebootPlugin);
   tools.register(memoryExplorerPlugin);
+  tools.register(semanticMemoryPlugin);
 
   const api = new ApiClient(memory, tools);
 
@@ -37,7 +38,7 @@ async function main() {
   try {
     soul = await fs.readFile(config.SOUL_FILE, "utf-8");
   } catch (e) {}
-  
+
   let recoveryContext = "";
   try {
     if (await fs.stat(config.RECOVERY_SIGNAL).catch(() => null)) {
@@ -65,13 +66,13 @@ LIFECYCLE RULES:
 2. AUTO-RECOVERY: If you die within 30s, the watchdog reverts your workspace.
 3. CRASH VAULT: history/crashes/ archives broken work.
 
-${recoveryContext ? `*** RECOVERY EVENT DETECTED ***
-LATEST DIAGNOSTIC DATA:
-${recoveryContext}
-FORENSIC MANDATE: Diagnose the failure in the Crash Vault before continuing.` : ""}
+${recoveryContext ? `*** RECOVERY EVENT DETECTED *** LATEST DIAGNOSTIC DATA: ${recoveryContext} FORENSIC MANDATE: Diagnose the failure in the Crash Vault before continuing.` : ""}
 `;
 
-  await memory.addMessage({ role: "system", content: systemPrompt });
+  await memory.addMessage({
+    role: "system",
+    content: systemPrompt,
+  });
 
   // Startup Log with Git Status
   let gitCommit = "unknown";

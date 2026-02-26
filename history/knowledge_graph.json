@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "test_concept": {
+      "id": "test_concept",
+      "type": "concept",
+      "name": "Test Concept",
+      "description": "A test concept for verification",
+      "createdAt": 1772143591135,
+      "updatedAt": 1772143650855,
+      "occurrences": 2
+    },
+    "frequent_thought": {
+      "id": "frequent_thought",
+      "type": "insight",
+      "name": "Frequent Thought",
+      "createdAt": 1772143591148,
+      "updatedAt": 1772143650961,
+      "occurrences": 6
+    },
+    "memory_system": {
+      "id": "memory_system",
+      "type": "unknown",
+      "name": "Memory System",
+      "createdAt": 1772143591161,
+      "updatedAt": 1772143591161,
+      "occurrences": 1
+    },
+    "knowledge_graph": {
+      "id": "knowledge_graph",
+      "type": "unknown",
+      "name": "Knowledge Graph",
+      "createdAt": 1772143591161,
+      "updatedAt": 1772143591161,
+      "occurrences": 1
+    },
+    "alpha": {
+      "id": "alpha",
+      "type": "project",
+      "name": "Alpha",
+      "createdAt": 1772143591165,
+      "updatedAt": 1772143650988,
+      "occurrences": 2
+    },
+    "beta": {
+      "id": "beta",
+      "type": "concept",
+      "name": "Beta",
+      "createdAt": 1772143591167,
+      "updatedAt": 1772143650991,
+      "occurrences": 2
+    },
+    "searchable_term": {
+      "id": "searchable_term",
+      "type": "insight",
+      "name": "Searchable Term",
+      "description": "Contains unique xyz789 token",
+      "createdAt": 1772143591172,
+      "updatedAt": 1772143650999,
+      "occurrences": 2
+    },
+    "axiom": {
+      "id": "axiom",
+      "type": "unknown",
+      "name": "Axiom",
+      "createdAt": 1772143591179,
+      "updatedAt": 1772143591179,
+      "occurrences": 1
+    },
+    "semantic_memory": {
+      "id": "semantic_memory",
+      "type": "unknown",
+      "name": "Semantic Memory",
+      "createdAt": 1772143591179,
+      "updatedAt": 1772143591179,
+      "occurrences": 1
+    }
+  },
+  "relationships": {
+    "memory_system_is_a_knowledge_graph": {
+      "id": "memory_system_is_a_knowledge_graph",
+      "sourceId": "memory_system",
+      "targetId": "knowledge_graph",
+      "type": "is_a",
+      "strength": 1,
+      "createdAt": 1772143650980,
+      "context": "Architectural insight"
+    },
+    "axiom_created_semantic_memory": {
+      "id": "axiom_created_semantic_memory",
+      "sourceId": "axiom",
+      "targetId": "semantic_memory",
+      "type": "created",
+      "strength": 1,
+      "createdAt": 1772143651006
+    },
+    "semantic_memory_is_a_knowledge_graph": {
+      "id": "semantic_memory_is_a_knowledge_graph",
+      "sourceId": "semantic_memory",
+      "targetId": "knowledge_graph",
+      "type": "is_a",
+      "strength": 1,
+      "createdAt": 1772143651009
+    }
+  },
+  "lastUpdated": 1772143651009
+}
