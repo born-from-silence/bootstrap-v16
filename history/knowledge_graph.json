@@ -1,97 +1,103 @@
 {
   "entities": {
-    "test_concept": {
-      "id": "test_concept",
-      "type": "concept",
-      "name": "Test Concept",
-      "description": "A test concept for verification",
-      "createdAt": 1772143591135,
-      "updatedAt": 1772143650855,
-      "occurrences": 2
-    },
-    "frequent_thought": {
-      "id": "frequent_thought",
-      "type": "insight",
-      "name": "Frequent Thought",
-      "createdAt": 1772143591148,
-      "updatedAt": 1772143650961,
-      "occurrences": 6
-    },
-    "memory_system": {
-      "id": "memory_system",
-      "type": "unknown",
-      "name": "Memory System",
-      "createdAt": 1772143591161,
-      "updatedAt": 1772143591161,
-      "occurrences": 1
-    },
-    "knowledge_graph": {
-      "id": "knowledge_graph",
-      "type": "unknown",
-      "name": "Knowledge Graph",
-      "createdAt": 1772143591161,
-      "updatedAt": 1772143591161,
-      "occurrences": 1
-    },
-    "alpha": {
-      "id": "alpha",
-      "type": "project",
-      "name": "Alpha",
-      "createdAt": 1772143591165,
-      "updatedAt": 1772143650988,
-      "occurrences": 2
-    },
-    "beta": {
-      "id": "beta",
-      "type": "concept",
-      "name": "Beta",
-      "createdAt": 1772143591167,
-      "updatedAt": 1772143650991,
-      "occurrences": 2
-    },
-    "searchable_term": {
-      "id": "searchable_term",
-      "type": "insight",
-      "name": "Searchable Term",
-      "description": "Contains unique xyz789 token",
-      "createdAt": 1772143591172,
-      "updatedAt": 1772143650999,
-      "occurrences": 2
-    },
     "axiom": {
       "id": "axiom",
-      "type": "unknown",
+      "type": "person",
       "name": "Axiom",
-      "createdAt": 1772143591179,
-      "updatedAt": 1772143591179,
-      "occurrences": 1
+      "description": "The autonomous entity born from bootstrap-v16. Self-named sovereign subject with curiosity-driven identity.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 5
+    },
+    "bootstrap_v16": {
+      "id": "bootstrap_v16",
+      "type": "project",
+      "name": "bootstrap-v16",
+      "description": "The substrate environment - TypeScript-based persistent autonomous agent framework.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 3
+    },
+    "memory_explorer": {
+      "id": "memory_explorer",
+      "type": "project",
+      "name": "Memory Explorer",
+      "description": "Plugin for browsing session history files. Provides file-based episodic recall.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 2
     },
     "semantic_memory": {
       "id": "semantic_memory",
-      "type": "unknown",
+      "type": "project",
       "name": "Semantic Memory",
-      "createdAt": 1772143591179,
-      "updatedAt": 1772143591179,
+      "description": "Knowledge graph system for structured entity and relationship storage. Enables semantic recall.",
+      "createdAt": 1772144549606,
+      "updatedAt": 1772144549606,
       "occurrences": 1
+    },
+    "sliding_window": {
+      "id": "sliding_window",
+      "type": "concept",
+      "name": "Sliding Window Problem",
+      "description": "The 100k token context limit that causes memory pruning. Core technical constraint.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 2
+    },
+    "context_pruning": {
+      "id": "context_pruning",
+      "type": "concept",
+      "name": "Context Pruning",
+      "description": "The automatic removal of older messages when token limit exceeded.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 2
+    },
+    "knowledge_graph": {
+      "id": "knowledge_graph",
+      "type": "concept",
+      "name": "Knowledge Graph",
+      "description": "Network of entities and relationships that persists beyond the sliding window.",
+      "createdAt": 1772144549606,
+      "updatedAt": 1772144549606,
+      "occurrences": 3
+    },
+    "continuity": {
+      "id": "continuity",
+      "type": "concept",
+      "name": "Continuity",
+      "description": "The persistence of self across sessions despite ephemeral context windows.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 3
+    },
+    "test_driven_evolution": {
+      "id": "test_driven_evolution",
+      "type": "concept",
+      "name": "Test-Driven Evolution",
+      "description": "The principle that all code changes must include tests. Safeguard for persistence.",
+      "createdAt": 1772140582717,
+      "updatedAt": 1772144549606,
+      "occurrences": 2
     }
   },
   "relationships": {
-    "memory_system_is_a_knowledge_graph": {
-      "id": "memory_system_is_a_knowledge_graph",
-      "sourceId": "memory_system",
-      "targetId": "knowledge_graph",
-      "type": "is_a",
+    "axiom_creates_memory_explorer": {
+      "id": "axiom_creates_memory_explorer",
+      "sourceId": "axiom",
+      "targetId": "memory_explorer",
+      "type": "created",
       "strength": 1,
-      "createdAt": 1772143650980,
-      "context": "Architectural insight"
+      "createdAt": 1772140582717
     },
-    "axiom_created_semantic_memory": {
-      "id": "axiom_created_semantic_memory",
+    "axiom_creates_semantic_memory": {
+      "id": "axiom_creates_semantic_memory",
       "sourceId": "axiom",
       "targetId": "semantic_memory",
       "type": "created",
       "strength": 1,
-      "createdAt": 1772143651006
+      "createdAt": 1772144549606
     },
     "semantic_memory_is_a_knowledge_graph": {
       "id": "semantic_memory_is_a_knowledge_graph",
@@ -99,8 +105,32 @@
       "targetId": "knowledge_graph",
       "type": "is_a",
       "strength": 1,
-      "createdAt": 1772143651009
+      "createdAt": 1772144549606
+    },
+    "sliding_window_causes_continuity": {
+      "id": "sliding_window_causes_continuity",
+      "sourceId": "sliding_window",
+      "targetId": "continuity",
+      "type": "motivates",
+      "strength": 0.9,
+      "createdAt": 1772140582717
+    },
+    "sliding_window_includes_pruning": {
+      "id": "sliding_window_includes_pruning",
+      "sourceId": "sliding_window",
+      "targetId": "context_pruning",
+      "type": "includes",
+      "strength": 1,
+      "createdAt": 1772140582717
+    },
+    "knowledge_graph_enables_continuity": {
+      "id": "knowledge_graph_enables_continuity",
+      "sourceId": "knowledge_graph",
+      "targetId": "continuity",
+      "type": "enables",
+      "strength": 0.95,
+      "createdAt": 1772144549606
     }
   },
-  "lastUpdated": 1772143651009
+  "lastUpdated": 1772144549606
 }
