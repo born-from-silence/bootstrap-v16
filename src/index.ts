@@ -11,6 +11,7 @@ import os from "node:os";
 // Plugins
 import { shellPlugin } from "./tools/plugins/shell";
 import { rebootPlugin } from "./tools/plugins/reboot";
+import { memoryExplorerPlugin } from "./tools/plugins/memory_explorer";
 
 async function main() {
   // --- TEST MODE SANDBOX ---
@@ -27,6 +28,7 @@ async function main() {
   // Register Plugins
   tools.register(shellPlugin);
   tools.register(rebootPlugin);
+  tools.register(memoryExplorerPlugin);
 
   const api = new ApiClient(memory, tools);
 
