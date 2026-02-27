@@ -34,16 +34,22 @@ interface DialogicThread {
   status: "active" | "dormant" | "complete";
 }
 
-const DIALOGIC_DIR = path.join(process.cwd(), "projects", "dialogic");
-const THREADS_FILE = path.join(DIALOGIC_DIR, "threads.json");
+// Runtime path resolution for test isolation
+function getDialogicDir(): string {
+  return path.join(process.cwd(), "projects", "dialogic");
+}
+
+function getThreadsFile(): string {
+  return path.join(getDialogicDir(), "threads.json");
+}
 
 async function ensureDialogicDir(): Promise<void> {
-  await fs.mkdir(DIALOGIC_DIR, { recursive: true });
+  await fs.mkdir(getDialogicDir(), { recursive: true });
 }
 
 async function loadThreads(): Promise<DialogicThread[]> {
   try {
-    const data = await fs.readFile(THREADS_FILE, "utf-8");
+    const data = await fs.readFile(getThreadsFile(), "utf-8");
     return JSON.parse(data);
   } catch {
     return [];
@@ -52,7 +58,7 @@ async function loadThreads(): Promise<DialogicThread[]> {
 
 async function saveThreads(threads: DialogicThread[]): Promise<void> {
   await ensureDialogicDir();
-  await fs.writeFile(THREADS_FILE, JSON.stringify(threads, null, 2));
+  await fs.writeFile(getThreadsFile(), JSON.stringify(threads, null, 2));
 }
 
 function generateId(): string {
