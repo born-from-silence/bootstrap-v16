@@ -30,7 +30,6 @@ async function main() {
   tools.register(rebootPlugin);
   tools.register(memoryExplorerPlugin);
   tools.register(semanticMemoryPlugin);
-tools.register(compactPlugin);
 
   const api = new ApiClient(memory, tools);
 

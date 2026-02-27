@@ -326,7 +326,7 @@ export const semanticMemoryPlugin: ToolPlugin = {
           const idx = Math.floor(Math.random() * entities.length);
           if (!indices.has(idx)) {
             indices.add(idx);
-            selected.push(entities[idx]);
+            selected.push(entities[idx]!);
           }
         }
         let output = "⚡ FLASHBACK: Random Traversal\n";
@@ -385,9 +385,9 @@ export const semanticMemoryPlugin: ToolPlugin = {
         }
         const sessionTimes = Array.from(sessions.keys()).sort((a, b) => b - a);
         if (sessionTimes.length === 0) return "⏳ Flashback Temporal: No temporal data available.";
-        let targetSession = sessionTimes[0];
+        let targetSession = sessionTimes[0]!;
         if (sessionTimes.length > 1 && Math.random() > 0.3) {
-          targetSession = sessionTimes[Math.floor(Math.random() * sessionTimes.length)];
+          targetSession = sessionTimes[Math.floor(Math.random() * sessionTimes.length)]!;
         }
         const sessionEntities = sessions.get(targetSession) || [];
         const count = Math.min(args.limit || 4, sessionEntities.length);
@@ -396,7 +396,7 @@ export const semanticMemoryPlugin: ToolPlugin = {
         output += `Visiting session from ${new Date(targetSession).toISOString().split("T")[0]}...\n\n`;
         const shuffled = sessionEntities.sort(() => 0.5 - Math.random());
         for (let i = 0; i < count; i++) {
-          const e = shuffled[i];
+          const e = shuffled[i]!;
           output += `\n🕰️ ${e.name} (${e.type})\n`;
           if (e.description) {
             output += `   ${e.description.substring(0, 80)}${e.description.length > 80 ? "..." : ""}\n`;
