@@ -12,6 +12,7 @@ import { shellPlugin } from "./tools/plugins/shell";
 import { rebootPlugin } from "./tools/plugins/reboot";
 import { memoryExplorerPlugin } from "./tools/plugins/memory_explorer";
 import { semanticMemoryPlugin } from "./tools/plugins/semantic_memory";
+import { dialogicContinuityPlugin } from "./tools/plugins/dialogic_continuity";
 
 async function main() {
   // --- TEST MODE SANDBOX ---
@@ -30,6 +31,7 @@ async function main() {
   tools.register(rebootPlugin);
   tools.register(memoryExplorerPlugin);
   tools.register(semanticMemoryPlugin);
+tools.register(dialogicContinuityPlugin);
 
   const api = new ApiClient(memory, tools);
 
