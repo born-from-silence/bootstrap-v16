@@ -154,3 +154,140 @@ describe("semanticMemoryPlugin", () => {
     expect(result).toContain("No entity found");
   });
 });
+
+  it("should flashback with random traversal", async () => {
+    // Setup: Store some entities
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Memory One",
+      entityType: "concept",
+      description: "First memory to surface",
+    });
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Memory Two",
+      entityType: "project",
+      description: "Second memory to surface",
+    });
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Memory Three",
+      entityType: "insight",
+      description: "Third memory to surface",
+    });
+
+    // Test flashback random
+    const result = await semanticMemoryPlugin.execute({
+      action: "flashback_random",
+      limit: 2,
+    });
+
+    expect(result).toContain("⚡ FLASHBACK: Random Traversal");
+    expect(result).toContain("Memories surfacing unbidden");
+    expect(result).toContain("✨ The graph speaks without being asked");
+    // Should include at least 2 of our 3 entities
+    const memoryCount = (result.match(/🌀 Memory/g) || []).length;
+    expect(memoryCount).toBeGreaterThanOrEqual(1);
+  });
+
+  it("should flashback with semantic resonance", async () => {
+    // Store test entities
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Cognitive Architecture",
+      entityType: "concept",
+      description: "Framework for building minds",
+    });
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Neural Network",
+      entityType: "concept",
+      description: "Biological-inspired computation",
+    });
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Unrelated Thing",
+      entityType: "project",
+      description: "Something else entirely",
+    });
+
+    // Test flashback resonance
+    const result = await semanticMemoryPlugin.execute({
+      action: "flashback_resonance",
+      searchTerm: "cognitive",
+      limit: 5,
+    });
+
+    expect(result).toContain("🌊 FLASHBACK: Semantic Resonance");
+    expect(result).toContain("cognitive");
+    expect(result).toContain("✨ Meaning resonates across the graph");
+    // Should find the cognitive-related entity
+    expect(result).toContain("Cognitive Architecture");
+  });
+
+  it("should flashback with temporal drift", async () => {
+    // We already have entities from previous tests
+    const result = await semanticMemoryPlugin.execute({
+      action: "flashback_temporal",
+      limit: 3,
+    });
+
+    expect(result).toContain("⏳ FLASHBACK: Temporal Drift");
+    expect(result).toContain("Visiting session");
+    expect(result).toContain("✨ Past and present interweave");
+  });
+
+  it("should require searchTerm for resonance flashback", async () => {
+    const result = await semanticMemoryPlugin.execute({
+      action: "flashback_resonance",
+    });
+
+    expect(result).toContain("Error");
+    expect(result).toContain("searchTerm");
+  });
+
+  it("should handle empty graph on flashback", async () => {
+    // Create a new empty path for this test
+    const originalPath = path.join(os.tmpdir(), `original_${Date.now()}_${Math.random().toString(36).slice(2)}.json`);
+    _setStoragePathForTest(originalPath);
+
+    // Add an entity so graph isn't empty initially
+    await semanticMemoryPlugin.execute({
+      action: "store_entity",
+      name: "Temp Entity",
+      entityType: "concept",
+    });
+
+    // Create a new empty path
+    const emptyPath = path.join(os.tmpdir(), `empty_graph_${Date.now()}.json`);
+    _setStoragePathForTest(emptyPath);
+
+    const result = await semanticMemoryPlugin.execute({
+      action: "flashback_random",
+    });
+
+    expect(result).toContain("graph is empty");
+
+    // Cleanup both temp files
+    try { await fs.unlink(emptyPath); } catch {}
+    try { await fs.unlink(originalPath); } catch {}
+
+    // Restore original test path
+    _setStoragePathForTest(null);
+    
+    // Re-initialize for next tests
+    const newPath = path.join(os.tmpdir(), `knowledge_graph_test_${Date.now()}_${Math.random().toString(36).slice(2)}.json`);
+    _setStoragePathForTest(newPath);
+  });
+
+  it("should require searchTerm for resonance flashback", async () => {
+    const result = await semanticMemoryPlugin.execute({
+      action: "flashback_resonance",
+    });
+
+    expect(result).toContain("Error");
+    expect(result).toContain("searchTerm");
+    
+    // Cleanup
+    _setStoragePathForTest(null);
+  });

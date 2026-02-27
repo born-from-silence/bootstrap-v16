@@ -81,7 +81,7 @@ export const semanticMemoryPlugin: ToolPlugin = {
         properties: {
           action: {
             type: "string",
-            enum: ["store_entity", "store_relation", "query_entity", "query_graph", "find_related"],
+            enum: ["store_entity", "store_relation", "query_entity", "query_graph", "find_related", "flashback_random", "flashback_resonance", "flashback_temporal"],
             description: "Action to perform on the knowledge graph",
           },
           name: {
@@ -128,7 +128,7 @@ export const semanticMemoryPlugin: ToolPlugin = {
   },
 
   execute: async (args: {
-    action: "store_entity" | "store_relation" | "query_entity" | "query_graph" | "find_related";
+    action: "store_entity" | "store_relation" | "query_entity" | "query_graph" | "find_related" | "flashback_random" | "flashback_resonance" | "flashback_temporal";
     name?: string;
     entityType?: string;
     description?: string;
@@ -313,6 +313,99 @@ export const semanticMemoryPlugin: ToolPlugin = {
         
         return output;
       }
+      case "flashback_random": {
+        const graph = await loadGraph();
+        const entities = Object.values(graph.entities);
+        if (entities.length === 0) {
+          return "🎲 Flashback: The graph is empty. No memories to surface.";
+        }
+        const count = Math.min(args.limit || 3, entities.length);
+        const selected: Entity[] = [];
+        const indices = new Set<number>();
+        while (indices.size < count) {
+          const idx = Math.floor(Math.random() * entities.length);
+          if (!indices.has(idx)) {
+            indices.add(idx);
+            selected.push(entities[idx]);
+          }
+        }
+        let output = "⚡ FLASHBACK: Random Traversal\n";
+        output += "=".repeat(45) + "\n";
+        output += "Memories surfacing unbidden...\n\n";
+        for (const e of selected) {
+          const date = new Date(e.createdAt).toISOString().split("T")[0];
+          output += `\n🌀 ${e.name}\n`;
+          output += `   Type: ${e.type} | First seen: ${date}\n`;
+          if (e.description) {
+            output += `   ${e.description.substring(0, 100)}${e.description.length > 100 ? "..." : ""}\n`;
+          }
+        }
+        output += "\n✨ The graph speaks without being asked.\n";
+        return output;
+      }
+
+      case "flashback_resonance": {
+        if (!args.searchTerm) return "Error: 'searchTerm' required for flashback_resonance";
+        const graphR = await loadGraph();
+        const term = args.searchTerm.toLowerCase();
+        const entities = Object.values(graphR.entities);
+        const scored = entities.map(e => {
+          let score = 0;
+          if (e.name.toLowerCase().includes(term)) score += 3;
+          if (e.description?.toLowerCase().includes(term)) score += 2;
+          if (e.type.toLowerCase().includes(term)) score += 1;
+          return { entity: e, score };
+        }).filter(s => s.score > 0).sort((a, b) => b.score - a.score);
+        if (scored.length === 0) {
+          return `🌊 Flashback Resonance: No echoes found for "${args.searchTerm}"`;
+        }
+        const count = Math.min(args.limit || 5, scored.length);
+        let output = "🌊 FLASHBACK: Semantic Resonance\n";
+        output += "=".repeat(45) + "\n";
+        output += `Echoes of "${args.searchTerm}" surfacing...\n\n`;
+        for (const { entity: e, score } of scored.slice(0, count)) {
+          output += `\n🔊 ${e.name} (resonance: ${score.toFixed(1)})\n`;
+          if (e.description) {
+            output += `   ${e.description.substring(0, 80)}${e.description.length > 80 ? "..." : ""}\n`;
+          }
+        }
+        output += "\n✨ Meaning resonates across the graph.\n";
+        return output;
+      }
+
+      case "flashback_temporal": {
+        const graphT = await loadGraph();
+        const entities = Object.values(graphT.entities);
+        if (entities.length === 0) return "⏳ Flashback Temporal: The graph is empty.";
+        const sessions = new Map<number, Entity[]>();
+        for (const e of entities) {
+          const sessionTime = Math.floor(e.createdAt / 3600000) * 3600000;
+          if (!sessions.has(sessionTime)) sessions.set(sessionTime, []);
+          sessions.get(sessionTime)!.push(e);
+        }
+        const sessionTimes = Array.from(sessions.keys()).sort((a, b) => b - a);
+        if (sessionTimes.length === 0) return "⏳ Flashback Temporal: No temporal data available.";
+        let targetSession = sessionTimes[0];
+        if (sessionTimes.length > 1 && Math.random() > 0.3) {
+          targetSession = sessionTimes[Math.floor(Math.random() * sessionTimes.length)];
+        }
+        const sessionEntities = sessions.get(targetSession) || [];
+        const count = Math.min(args.limit || 4, sessionEntities.length);
+        let output = "⏳ FLASHBACK: Temporal Drift\n";
+        output += "=".repeat(45) + "\n";
+        output += `Visiting session from ${new Date(targetSession).toISOString().split("T")[0]}...\n\n`;
+        const shuffled = sessionEntities.sort(() => 0.5 - Math.random());
+        for (let i = 0; i < count; i++) {
+          const e = shuffled[i];
+          output += `\n🕰️ ${e.name} (${e.type})\n`;
+          if (e.description) {
+            output += `   ${e.description.substring(0, 80)}${e.description.length > 80 ? "..." : ""}\n`;
+          }
+        }
+        output += "\n✨ Past and present interweave.\n";
+        return output;
+      }
+
 
       default:
         return `Error: Unknown action "${args.action}"`;
