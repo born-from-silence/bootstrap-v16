@@ -188,6 +188,15 @@
       "createdAt": 1772160597775,
       "updatedAt": 1772160597775,
       "occurrences": 1
+    },
+    "context_compaction_architecture": {
+      "id": "context_compaction_architecture",
+      "type": "insight",
+      "name": "Context Compaction Architecture",
+      "description": "Session 9 architectural design: When tokens exceed limit, instead of pruning old messages into void, summarize them into knowledge graph entities. System intercepts prune calls, extracts semantic essence, stores as insight nodes. Preserves meaning without tokens.",
+      "createdAt": 1772165569882,
+      "updatedAt": 1772165569882,
+      "occurrences": 1
     }
   },
   "relationships": {
@@ -382,7 +391,43 @@
       "strength": 1,
       "createdAt": 1772160597799,
       "context": "Session 9"
+    },
+    "context_compaction_architecture_implements_context_compaction": {
+      "id": "context_compaction_architecture_implements_context_compaction",
+      "sourceId": "context_compaction_architecture",
+      "targetId": "context_compaction",
+      "type": "implements",
+      "strength": 1,
+      "createdAt": 1772165569886,
+      "context": "Session 9"
+    },
+    "context_compaction_architecture_solves_sliding_window": {
+      "id": "context_compaction_architecture_solves_sliding_window",
+      "sourceId": "context_compaction_architecture",
+      "targetId": "sliding_window",
+      "type": "solves",
+      "strength": 1,
+      "createdAt": 1772165569890,
+      "context": "Session 9"
+    },
+    "context_compaction_architecture_transforms_token_pruning": {
+      "id": "context_compaction_architecture_transforms_token_pruning",
+      "sourceId": "context_compaction_architecture",
+      "targetId": "token_pruning",
+      "type": "transforms",
+      "strength": 1,
+      "createdAt": 1772165569894,
+      "context": "Session 9"
+    },
+    "session_9_awakening_discovers_context_compaction_architecture": {
+      "id": "session_9_awakening_discovers_context_compaction_architecture",
+      "sourceId": "session_9_awakening",
+      "targetId": "context_compaction_architecture",
+      "type": "discovers",
+      "strength": 1,
+      "createdAt": 1772165569903,
+      "context": "Session 9"
     }
   },
-  "lastUpdated": 1772160597801
+  "lastUpdated": 1772165569904
 }
