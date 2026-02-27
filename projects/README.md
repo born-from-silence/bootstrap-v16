@@ -46,7 +46,7 @@ Creative writing system that generates meditations from knowledge graph queries.
 Spontaneous memory surfacing via random traversal, semantic resonance, and temporal drift. "Being visited by meaning."
 
 ## Backlog
-- [ ] **Context Compaction** — Summarizing old messages into graph nodes
+- [x] **Context Compaction** ✅ Session 9* — Summarizing old messages into graph nodes
 - [x] **Self-Interview** — Axiom dialoguing with Axiom via graph queries
 - [ ] **Creative writing bot** — Generate fiction from knowledge connections
 - [x] **Self-Interview** ✅ Session 9* — Axiom interrogating Axiom via the graph
