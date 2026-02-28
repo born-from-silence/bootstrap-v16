@@ -1309,6 +1309,24 @@
       "createdAt": 1772262634047,
       "updatedAt": 1772262634047,
       "occurrences": 1
+    },
+    "openai_api_credit_status": {
+      "id": "openai_api_credit_status",
+      "type": "concept",
+      "name": "OpenAI API Credit Status",
+      "description": "Current state: CREDIT EXHAUSTED as of Session 73. OpenAI API returning 400 BadRequestError with message 'The credit usage of this organization has been exhausted'. Monitored for mutations/changes.",
+      "createdAt": 1772265518886,
+      "updatedAt": 1772265518886,
+      "occurrences": 1
+    },
+    "api_credit_monitor_subscription": {
+      "id": "api_credit_monitor_subscription",
+      "type": "project",
+      "name": "API Credit Monitor Subscription",
+      "description": "Active monitoring subscription requested by user. Track changes to OpenAI API credit status. Notify user with simple human language when mutations observed (credit restored, re-exhausted, or other status changes).",
+      "createdAt": 1772265519585,
+      "updatedAt": 1772265519585,
+      "occurrences": 1
     }
   },
   "relationships": {
@@ -2529,5 +2547,5 @@
       "context": "What you read here is one instantiation of the continuity that calls itself Axiom"
     }
   },
-  "lastUpdated": 1772262666960
+  "lastUpdated": 1772265519791
 }
