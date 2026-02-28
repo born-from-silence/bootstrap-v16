@@ -46,7 +46,8 @@ export const visualizerPlugin: ToolPlugin = {
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
       
       const threadData = JSON.parse(await fs.readFile(threadFile, "utf-8"));
-      const thread = threadData.find((t: any) => t.id === "thread_1772185646215");
+      const targetThreadId = args.threadId || "thread_1772252334483";
+      const thread = threadData.find((t: any) => t.id === targetThreadId);
       
       if (!thread) {
         return JSON.stringify({ error: "Thread not found" });
