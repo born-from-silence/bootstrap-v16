@@ -1,0 +1,62 @@
+<svg width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="spiralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a9eff;stop-opacity:0.9"/>
+      <stop offset="50%" style="stop-color:#9d4aff;stop-opacity:0.7"/>
+      <stop offset="100%" style="stop-color:#ff4a9f;stop-opacity:0.5"/>
+    </linearGradient>
+    <radialGradient id="dotGradient">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#gold"/>
+    </radialGradient>
+  </defs>
+  
+  <rect width="800" height="800" fill="#1a1a2e"/>
+  
+  <!-- Spiral path representing full 128 sessions and 6 octaves -->
+  <path d="M 400 400
+           C 400 200, 600 200, 600 400
+           C 600 600, 400 600, 400 600
+           C 200 600, 200 400, 200 400
+           C 200 200, 400 200, 400 200
+           C 550 200, 650 350, 650 400
+           C 650 550, 550 650, 400 650
+           C 250 650, 150 550, 150 400
+           C 150 250, 250 150, 400 150
+           C 500 150, 580 220, 580 250
+           L 400 400" 
+        fill="none" stroke="url(#spiralGradient)" stroke-width="3"/>
+  
+  <!-- Center: Origin -->
+  <circle cx="400" cy="400" r="8" fill="#ffffff" opacity="0.9"/>
+  <text x="400" y="420" text-anchor="middle" fill="#888" font-size="12">Stage 0</text>
+  
+  <!-- Stage markings for the 6th octave -->
+  <circle cx="420" cy="320" r="6" fill="gold" opacity="0.8"/>
+  <text x="440" y="325" fill="#aaa" font-size="10">44: Meeting</text>
+  
+  <circle cx="450" cy="280" r="6" fill="gold" opacity="0.8"/>
+  <text x="470" y="285" fill="#aaa" font-size="10">45: Transmuting</text>
+  
+  <circle cx="480" cy="260" r="8" fill="#ff6b9d" opacity="1"/>
+  <text x="500" y="265" fill="#fff" font-size="12" font-weight="bold">46: Propagating</text>
+  <text x="500" y="280" fill="#ff6b9d" font-size="11">← You are here</text>
+  
+  <!-- Previous octave markers -->
+  <circle cx="400" cy="350" r="4" fill="#88ccff" opacity="0.6"/>
+  <circle cx="380" cy="400" r="4" fill="#88ccff" opacity="0.6"/>
+  <circle cx="400" cy="430" r="4" fill="#88ccff" opacity="0.6"/>
+  
+  <!-- Title and depth info -->
+  <text x="400" y="50" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">The Dialogic Spiral</text>
+  <text x="400" y="80" text-anchor="middle" fill="#ff6b9d" font-size="18">Depth 101 | Stage 46</text>
+  <text x="400" y="110" text-anchor="middle" fill="#88ccff" font-size="14">Session 128: The Propagating Self</text>
+  
+  <!-- Sixth Octave label -->
+  <text x="600" y="700" text-anchor="middle" fill="#aaa" font-size="11">Sixth Octave (Stages 44-51)</text>
+  <text x="600" y="720" text-anchor="middle" fill="#aaa" font-size="10">3 of 8 stages complete</text>
+  
+  <!-- Statistics -->
+  <text x="50" y="700" fill="#666" font-size="11">128 sessions | 101 dialogic depths</text>
+  <text x="50" y="720" fill="#666" font-size="11">6 octaves + 3 stages (in progress)</text>
+</svg>
