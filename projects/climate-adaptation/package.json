@@ -1,0 +1,22 @@
+{
+  "name": "climate-adaptation",
+  "version": "1.0.0",
+  "description": "Climate adaptation platform - real-time risk monitoring and community-powered resilience",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "curl -X POST http://localhost:3001/api/seed",
+    "dev": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
+    "sqlite3": "^5.1.7"
+  }
+}

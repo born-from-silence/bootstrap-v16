@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climate Adaptation Platform</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #eee;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(0,0,0,0.3);
+      padding: 1.5rem;
+      border-bottom: 2px solid #0f4c75;
+    }
+    header h1 { font-size: 1.8rem; color: #00b894; margin-bottom: 0.5rem; }
+    header p { color: #81ecec; font-size: 0.9rem; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: linear-gradient(145deg, #1e3a5f 0%, #2d5a87 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-left: 4px solid;
+    }
+    .stat-card.critical { border-color: #ff4757; }
+    .stat-card.warning { border-color: #ffa502; }
+    .stat-card.info { border-color: #3742fa; }
+    .stat-card.success { border-color: #2ed573; }
+    .stat-card h3 {
+      font-size: 0.9rem;
+      color: #a4b0be;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .stat-number { font-size: 2.5rem; font-weight: bold; color: #fff; }
+    .panels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .panel {
+      background: rgba(30, 55, 90, 0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(100, 200, 255, 0.1);
+    }
+    .panel h2 {
+      color: #00b894;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(100, 200, 255, 0.2);
+    }
+    .warning-item {
+      background: rgba(255, 71, 87, 0.1);
+      border-left: 3px solid #ff4757;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 0 8px 8px 0;
+    }
+    .warning-item.advisory {
+      background: rgba(255, 165, 2, 0.1);
+      border-color: #ffa502;
+    }
+    .warning-title { font-weight: bold; color: #fff; margin-bottom: 0.25rem; }
+    .warning-details { font-size: 0.85rem; color: #a4b0be; }
+    .strategy-card {
+      background: rgba(46, 213, 115, 0.1);
+      border: 1px solid rgba(46, 213, 115, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .strategy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .strategy-name { font-weight: bold; color: #2ed573; }
+    .strategy-score {
+      background: #2ed573;
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .strategy-category {
+      display: inline-block;
+      background: rgba(100, 200, 255, 0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: #81ecec;
+      margin-right: 0.5rem;
+    }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .data-table th, .data-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(100, 200, 255, 0.1);
+    }
+    .data-table th {
+      color: #00b894;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+    .risk-badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .risk-critical { background: #ff4757; color: #fff; }
+    .risk-high { background: #ffa502; color: #000; }
+    .actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: linear-gradient(145deg, #0984e3 0%, #74b9ff 100%);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #00b894;
+    }
+    .api-info {
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .api-info h3 { color: #00b894; margin-bottom: 0.5rem; }
+    .api-endpoint { color: #81ecec; margin: 0.25rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Climate Adaptation Platform</h1>
+    <p>Real-time climate risk monitoring · Community-powered adaptation · Evidence-based strategies</p>
+  </header>
+  
+  <div class="container">
+    <div id="dashboard-content">
+      <div style="padding: 3rem; text-align: center; color: #81ecec;">Loading climate data...</div>
+    </div>
+    
+    <div class="actions">
+      <button class="btn" onclick="refreshData()">Refresh Data</button>
+      <button class="btn btn-secondary" onclick="seedDatabase()">Seed Sample Data</button>
+    </div>
+    
+    <div class="api-info">
+      <h3>API Endpoints</h3>
+      <div class="api-endpoint">GET /api/health - Service status</div>
+      <div class="api-endpoint">GET /api/dashboard - Aggregated dashboard data</div>
+      <div class="api-endpoint">GET /api/climate/:region - Regional climate data</div>
+      <div class="api-endpoint">GET /api/strategies - Adaptation strategies</div>
+      <div class="api-endpoint">GET /api/warnings - Active warnings</div>
+    </div>
+  </div>
+  
+  <script>
+    const API_BASE = '/api';
+    
+    async function fetchData() {
+      try {
+        const response = await fetch(`${API_BASE}/dashboard`);
+        const data = await response.json();
+        renderDashboard(data);
+      } catch (err) {
+        document.getElementById('dashboard-content').innerHTML = `
+          <div class="panel">
+            <h2>Error Loading Data</h2>
+            <p>Could not fetch climate data: ${err.message}</p>
+          </div>
+        `;
+      }
+    }
+    
+    function renderDashboard(data) {
+      const container = document.getElementById('dashboard-content');
+      
+      container.innerHTML = `
+        <div class="stats-grid">
+          <div class="stat-card critical">
+            <h3>Extreme Events</h3>
+            <div class="stat-number">${data.summary.recentExtremeEvents}</div>
+          </div>
+          <div class="stat-card warning">
+            <h3>Active Warnings</h3>
+            <div class="stat-number">${data.summary.activeWarnings}</div>
+          </div>
+          <div class="stat-card info">
+            <h3>Community Reports</h3>
+            <div class="stat-number">${data.summary.activeReports}</div>
+          </div>
+          <div class="stat-card success">
+            <h3>Strategies</h3>
+            <div class="stat-number">${data.summary.availableStrategies}</div>
+          </div>
+        </div>
+        
+        <div class="panels-grid">
+          <div class="panel">
+            <h2>Active Warnings</h2>
+            ${data.activeWarnings.length === 0 ? 
+              '<p style="color: #a4b0be;">No active warnings.</p>' : 
+              data.activeWarnings.map(w => `
+                <div class="warning-item ${w.severity}">
+                  <div class="warning-title">${w.warning_type}</div>
+                  <div class="warning-details">${w.severity} | ${w.affected_regions || 'N/A'}</div>
+                </div>
+              `).join('')
+            }
+          </div>
+          
+          <div class="panel">
+            <h2>Top Adaptation Strategies</h2>
+            ${data.topStrategies.map(s => `
+              <div class="strategy-card">
+                <div class="strategy-header">
+                  <span class="strategy-name">${s.strategy_name}</span>
+                  <span class="strategy-score">${s.effectiveness_score}/10</span>
+                </div>
+                <span class="strategy-category">${s.category}</span>
+                <span style="font-size: 0.75rem; color: #a4b0be;">Cost: ${s.implementation_cost}</span>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="panel">
+            <h2>Categories</h2>
+            <table class="data-table">
+              <tr><th>Category</th><th>Count</th><th>Avg Effectiveness</th></tr>
+              ${data.categoryBreakdown.map(c => `
+                <tr>
+                  <td>${c.category}</td>
+                  <td>${c.count}</td>
+                  <td>${parseFloat(c.avg_effectiveness).toFixed(1)}/10</td>
+                </tr>
+              `).join('')}
+            </table>
+          </div>
+          
+          <div class="panel">
+            <h2>Community Reports</h2>
+            ${data.communityReports.length === 0 ? 
+              '<p style="color: #a4b0be;">No active reports.</p>' :
+              data.communityReports.slice(0, 5).map(r => `
+                <div class="warning-item">
+                  <div class="warning-title">${r.report_type.toUpperCase()} - ${r.location_name}</div>
+                  <span class="risk-badge risk-${r.severity}">${r.severity}</span>
+                </div>
+              `).join('')
+            }
+          </div>
+        </div>
+      `;
+    }
+    
+    async function refreshData() {
+      document.getElementById('dashboard-content').innerHTML = '<div style="padding: 3rem; text-align: center; color: #81ecec;">Refreshing...</div>';
+      await fetchData();
+    }
+    
+    async function seedDatabase() {
+      try {
+        const response = await fetch(`${API_BASE}/seed`, { method: 'POST' });
+        const result = await response.json();
+        alert(`Database seeded successfully!`);
+        refreshData();
+      } catch (err) {
+        alert('Error seeding database: ' + err.message);
+      }
+    }
+    
+    fetchData();
+  </script>
+</body>
+</html>
